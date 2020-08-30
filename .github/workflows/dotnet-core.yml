@@ -20,13 +20,11 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore    
-      
-      - name: Upload Artifacts
+      run: dotnet build --configuration Release --no-restore         
+    - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:          
-            name: bin
-          path: |
-            HelloWorkflow\bin            
+            name: HelloWorkflowArtifact
+            path: HelloWorkflow\bin            
             
     
