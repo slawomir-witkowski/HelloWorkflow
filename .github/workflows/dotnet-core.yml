@@ -19,10 +19,23 @@ jobs:
             dotnet-version: 3.1.301
         - name: Install dependencies
           run: dotnet restore
+          
         - name: Build
           run: dotnet build --configuration Release --no-restore         
+          
+        - name: Create Directory
+          run: |
+            New-Item "HelloTools\Hello1" -ItemType Directory -Force
+            New-Item "HelloTools\Hello2" -ItemType Directory -Force
+          shell: powershell
+          
+        - name: Copy tools
+          run: |
+            Copy-Item "HelloWorkflow\bin\Release\netcoreapp3.1\*.*" -Destination "HelloTools\Hello1"
+            Copy-Item "Hello2\bin\Release\netcoreapp3.1\*.*" -Destination "HelloTools\Hello2"
+                    
         - name: Upload Artifacts
           uses: actions/upload-artifact@v2
           with:          
             name: HelloWorkflowArtifact
-            path: HelloWorkflow\bin
+            path: HelloTools                
