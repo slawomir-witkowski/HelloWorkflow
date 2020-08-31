@@ -21,7 +21,7 @@ jobs:
           run: dotnet restore
           
         - name: Build
-          run: dotnet build --configuration Release --no-restore         
+          run: dotnet build /p:AssemblyVersion="1.1.${{ github.run_number }}" --configuration Release --no-restore
           
         - name: Create Directory
           run: |
